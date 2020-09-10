@@ -1,0 +1,48 @@
+#DESCRIPTION:
+#Kangeroo1 starts at a position x1 and moves at velocity v1, kangeroo2 starts at position x2 and moves at velocity v2. 
+#Return YES if the kangeroos are ever at the same spot at the same time, or NO if this didn't occur.
+#CONSTRAINTS:
+#0<=x1<x2<=10000
+#1<=v1<=10000
+#1<=v2<=10000
+
+
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#x1 = kangeroo1 starting position, x2 = kangeroo2 starting position, v1 = velocity of kangeroo1, v2 = velocity of kangeroo2
+
+def kangaroo(x1, v1, x2, v2):
+    while x2>=x1 and v1>v2:
+        if x2 == x1:
+            return "YES"
+        x2 += v2
+        x1 += v1
+    return "NO"
+
+#code below provided by hackerrank
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    x1V1X2V2 = input().split()
+
+    x1 = int(x1V1X2V2[0])
+
+    v1 = int(x1V1X2V2[1])
+
+    x2 = int(x1V1X2V2[2])
+
+    v2 = int(x1V1X2V2[3])
+
+    result = kangaroo(x1, v1, x2, v2)
+
+    fptr.write(result + '\n')
+
+    fptr.close()

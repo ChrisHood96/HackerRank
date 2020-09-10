@@ -1,0 +1,38 @@
+#DESCRIPTION:
+#john works at a clothing store. He has a large pile of socks that he must pair by color for sale. 
+#Given an array of integers representing the color of each sock, determine how many pairs of socks with matching colors there are.
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#n = number of socks in pile, ar = the colours of each sock
+
+def sockMerchant(n, ar):
+    pairs = 0
+    for i in ar:
+        if ar.count(i)%2 == 0:
+            pairs += ar.count(i)/2
+        else:
+            pairs += (ar.count(i)-1)/2
+        ar = list(filter((i).__ne__,ar))
+    return int(pairs)
+
+#code below written by hackerrank
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    ar = list(map(int, input().rstrip().split()))
+
+    result = sockMerchant(n, ar)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

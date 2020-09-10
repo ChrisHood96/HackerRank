@@ -1,0 +1,41 @@
+#DESCRIPTION:
+#Given a time in 12-hour AM/PM format, convert it to military (24-hour) time. 
+
+#!/bin/python3
+
+import os
+import sys
+
+#
+#s = time in 12hr format, followed by AM or PM
+#
+def timeConversion(s):
+    if "AM" in s:
+        if s[:2] == "12":
+            x = s[:2]
+            conv = int(x) - 12
+            amtime = "0{}".format(str(conv)) + s[2:8]
+        else:
+            amtime = s[:8]         
+        return amtime
+    else:
+        if s[:2] != "12":
+            x = s[:2]
+            conv = int(x) + 12
+            pmtime = str(conv) + s[2:8]
+        else:
+            pmtime = s[:8]
+        return pmtime
+
+#code below provided by hackerrank
+
+if __name__ == '__main__':
+    f = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = timeConversion(s)
+
+    f.write(result + '\n')
+
+    f.close()

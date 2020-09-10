@@ -1,0 +1,45 @@
+#DESCRIPTION:
+#Watson likes to challenge Sherlock's math ability. He will provide a starting and ending value describing a range of integers. 
+#Sherlock must determine the number of square integers within that range, inclusive of the endpoints.
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+#a: an integer, the lower range boundary
+#b: an integer, the uppere range boundary
+
+def squares(a, b):
+    squarenums = []
+    for i in range(b):
+        c = i * i
+        if c > b:
+            break
+        if b >= c >= a: 
+            squarenums.append(((a+i)-1)*((a+i)-1))
+    return len(squarenums)
+
+#code below provided by hackerrank
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        ab = input().split()
+
+        a = int(ab[0])
+
+        b = int(ab[1])
+
+        result = squares(a, b)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

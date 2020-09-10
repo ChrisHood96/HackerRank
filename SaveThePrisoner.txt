@@ -1,0 +1,48 @@
+#DESCRIPTION:
+#A jail has a number of prisoners and a number of treats to pass out to them.
+#Their jailer decides the fairest way to divide the treats is to seat the prisoners around a circular table in sequentially numbered chairs.
+#A chair number will be drawn from a hat. Beginning with the prisoner in that chair, one candy will be handed to each prisoner sequentially around the table until all have been distributed.
+#The jailer is playing a little joke, though. The last piece of candy looks like all the others, but it tastes awful. 
+#Determine the chair number occupied by the prisoner who will receive that candy.
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#n = number of prisoners, #m = number of sweets, #s = the chair where the first treat is given out
+
+def saveThePrisoner(n, m, s):
+    seat = ((m%n)-1)+s
+    if seat == 0:
+        seat = (((m%n)+s)+n-1)
+        if seat > n:
+            seat -= n
+    elif seat > n:
+        seat -= n
+    return seat
+
+#code below provided by hackerrank
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input())
+
+    for t_itr in range(t):
+        nms = input().split()
+
+        n = int(nms[0])
+
+        m = int(nms[1])
+
+        s = int(nms[2])
+
+        result = saveThePrisoner(n, m, s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()

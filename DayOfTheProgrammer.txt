@@ -1,0 +1,71 @@
+#DESCRIPTION:
+#Given a year, , find the date of the 256th day of that year according to the official Russian calendar during that year. 
+#Then print it in the format dd.mm.yyyy, where dd is the two-digit day, mm is the two-digit month, and yyyy is y, for years between 1700 to 2700.
+#Takes into account the change of the Julian calander system to the Gregorian calander, which occured in 1918.
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#Can be used for any day, not just the 256th day.
+#takes year as input and determines the 256th day of that year.
+
+months = [31,28,31,30,31,30,31,31,30,31,30,31]
+monthsL = [31,29,31,30,31,30,31,31,30,31,30,31]
+def dayOfProgrammer(year):
+    day = 0
+    month = 0
+    if year < 1918:
+        if year%4 == 0:
+            for i in monthsL:
+                month += 1 
+                if i+day > 256:
+                    break
+                day += i
+            return(str(256-day)+"."+str(month).zfill(2)+"."+str(year))
+        else:
+            for i in months:
+                month += 1 
+                if i+day > 256:
+                    break
+                day += i
+            return(str(256-day)+"."+str(month).zfill(2)+"."+str(year))
+    elif year == 1918:
+            for i in monthsL:
+                month += 1 
+                if i+day > 256:
+                    break
+                day += i
+            return(str(256-day+14)+"."+str(month).zfill(2)+"."+str(year))
+    else:
+        if year%400 == 0 or year%4 == 0 and year%100 != 0:
+            for i in monthsL:
+                month += 1 
+                if i+day > 256:
+                    break
+                day += i
+            return(str(256-day)+"."+str(month).zfill(2)+"."+str(year))
+        else:
+            for i in months:
+                month += 1 
+                if i+day > 256:
+                    break
+                day += i
+            return(str(256-day)+"."+str(month).zfill(2)+"."+str(year))
+
+#code below provided by hackerrank
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    year = int(input().strip())
+
+    result = dayOfProgrammer(year)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
